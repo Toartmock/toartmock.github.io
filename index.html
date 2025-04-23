@@ -1,1 +1,67 @@
-<h1>This will be great!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Slider Rectangle</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #rectangle {
+            width: 200px;
+            height: 100px;
+            margin-bottom: 20px;
+            border: 1px solid #000;
+        }
+        .slider-container {
+            margin: 10px;
+        }
+        label {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="rectangle"></div>
+    <div class="slider-container">
+        <label for="redSlider">Red:</label>
+        <input type="range" id="redSlider" min="0" max="255" value="0">
+    </div>
+    <div class="slider-container">
+        <label for="greenSlider">Green:</label>
+        <input type="range" id="greenSlider" min="0" max="255" value="0">
+    </div>
+    <div class="slider-container">
+        <label for="blueSlider">Blue:</label>
+        <input type="range" id="blueSlider" min="0" max="255" value="0">
+    </div>
+
+    <script>
+        const rectangle = document.getElementById('rectangle');
+        const redSlider = document.getElementById('redSlider');
+        const greenSlider = document.getElementById('greenSlider');
+        const blueSlider = document.getElementById('blueSlider');
+
+        function updateColor() {
+            const red = redSlider.value;
+            const green = greenSlider.value;
+            const blue = blueSlider.value;
+            rectangle.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        }
+
+        redSlider.addEventListener('input', updateColor);
+        greenSlider.addEventListener('input', updateColor);
+        blueSlider.addEventListener('input', updateColor);
+
+        // Initialize color
+        updateColor();
+    </script>
+</body>
+</html>
