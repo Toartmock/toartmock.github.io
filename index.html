@@ -3,65 +3,683 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Slider Rectangle</title>
+    <title>Colorwizard's Trial!</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
+            margin: 0px;
+            padding: 0px;
+            background-color: #202020;
             font-family: Arial, sans-serif;
         }
-        #rectangle {
-            width: 200px;
-            height: 100px;
-            margin-bottom: 20px;
-            border: 1px solid #000;
+
+        /* https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/ */
+
+        .slider-hori {
+            --SliderColor: #646464;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 600px;
+            margin: 50px auto;
+            height: 2px;
+            margin: 24px 0px 21px 0px;
         }
-        .slider-container {
-            margin: 10px;
+
+        .slider-hori::-moz-range-thumb {
+            -moz-appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 13px;
+            border-width: 0px;
+            background-color: var(--SliderColor);
+            overflow: visible;
+            cursor: pointer;
         }
-        label {
-            margin-right: 10px;
+
+        .slider-vert-round {
+            /*https://stackoverflow.com/a/15935838*/
+            --SliderColor: #646464;
+            writing-mode: vertical-lr;
+            direction: rtl;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 600px;
+            margin: 0px 21px 0px 24px;
+            width: 2px;
+        }
+
+        .slider-vert-round::-moz-range-thumb {
+            -moz-appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 13px;
+            border-width: 0px;
+            background-color: var(--SliderColor);
+            overflow: visible;
+            cursor: pointer;
+        }
+
+        .slider-vert-square {
+            --SliderColor: #646464;
+            writing-mode: vertical-lr;
+            direction: rtl;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 600px;
+            margin: 0px 21px 0px 24px;
+            width: 2px;
+        }
+
+        .slider-vert-square::-moz-range-thumb {
+            -moz-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 2px;
+            border-width: 0px;
+            background-color: var(--SliderColor);
+            overflow: visible;
+            cursor: pointer;
+        }
+
+        .main-content {
+            flex: 0;
+            display: flex;
+            overflow: hidden;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .output-text-column {
+            background-color: #202020;
+            color: #646464;
+            font-family: monospace;
+            font-size: 10px;
+            height: 650px;
+            width: 180px;
+            margin: 0px;
+            padding: 0px;
+            overflow: auto;
+            text-align: center;
+        }
+
+        .padding-column {
+            background-color: #202020;
+            height: 650px;
+            width: 134px;
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            align-items: flex-end;
+
+        }
+
+        .slider-column {
+            background-color: #202020;
+            height: 650px;
+            width: 101px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .central-column {
+            background-color: #202020;
+            height: 650px;
+            width: 550px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .central-element {
+            height: 600px;
+            width: 550px;
+            background-color: white;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .bottom-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+
+        button {
+            background-color: #202020;
+            color: white;
+            padding: 4px;
+            font-family: "Fontin SmallCaps", sans-serif;
+            margin: 0px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #303030;
+        }
+
+        button:active {
+            background-color: #3b5;
+        }
+
+        .image-container {
+            position: relative;
+            height: 600px;
+            width: 550px;
+            margin: 0;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-box {
+            position: absolute;
+            border: 2px solid #f0f;
+            background: #141414;
+            /* Semi-transparent background */
+            color: #0ff;
+            padding: 2px 4px 1px 4px;
+            font-family: "Fontin SmallCaps", sans-serif;
+            font-size: 27px;
+            z-index: 10;
+            left: 10px;
+            /* Ensure boxes are above the image */
+        }
+
+        .box1 {
+            top: 54px;
+        }
+
+        .box2 {
+            top: 95px;
+        }
+
+        .box3 {
+            top: 136px;
+        }
+
+        .box4 {
+            top: 177px;
+        }
+
+        .box5 {
+            top: 218px;
+        }
+
+        .box6 {
+            top: 259px;
+        }
+
+        .box7 {
+            top: 300px;
+        }
+
+        .box8 {
+            top: 341px;
+        }
+
+        .box9 {
+            top: 382px;
+        }
+
+        .box10 {
+            top: 423px;
+        }
+
+        .box11 {
+            top: 464px;
+        }
+
+        .box12 {
+            top: 505px;
+        }
+
+        #wrapper {
+            /* https://stackoverflow.com/a/9622394 */
+            width: 1200px;
+            height: 650px;
+            margin: 0 auto;
+            background: #f7f7f7;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -600px;
+            margin-top: -325px;
         }
     </style>
 </head>
-<body>
-    <div id="rectangle"></div>
-    <div class="slider-container">
-        <label for="redSlider">Red:</label>
-        <input type="range" id="redSlider" min="0" max="255" value="0">
+
+<body onload="findAndUpdateNewColorsToMatch()">
+    <div id="wrapper">
+        <!-- Main content area -->
+        <div class="main-content">
+
+            <div class="output-text-column">
+                <p id="hexcodedisplay"></p>
+
+            </div>
+            <div class="padding-column">
+
+                <button onclick="copyToClipboard()">Copy Results<br>to Clipboard</button>
+            </div>
+            <!-- Left sliders -->
+            <div class="slider-column">
+                <input type="range" id="left-light-slider" class="slider-vert-round" orient="vertical" min="-1000"
+                    max="1000" value="0">
+                <input type="range" id="left-chrom-slider" class="slider-vert-square" orient="vertical" min="-1000"
+                    max="1000" value="0">
+            </div>
+
+            <div class="central-column">
+                <!-- Central element -->
+                <div class="central-element" id="central-element">
+                    <div class="image-container">
+                        <img src="Dunes64.jpg" alt="Background Image">
+                        <div class="text-box box1" id="box-1">Chaos Orb</div>
+                        <div class="text-box box2" id="box-2">Chaos Orb</div>
+                        <div class="text-box box3" id="box-3">Chaos Orb</div>
+                        <div class="text-box box4" id="box-4">Chaos Orb</div>
+                        <div class="text-box box5" id="box-5">Chaos Orb</div>
+                        <div class="text-box box6" id="box-6">Chaos Orb</div>
+                        <div class="text-box box7" id="box-7">Chaos Orb</div>
+                        <div class="text-box box8" id="box-8">Chaos Orb</div>
+                        <div class="text-box box9" id="box-9">Chaos Orb</div>
+                        <div class="text-box box10" id="box-10">Chaos Orb</div>
+                        <div class="text-box box11" id="box-11">Chaos Orb</div>
+                        <div class="text-box box12" id="box-12">Chaos Orb</div>
+                    </div>
+                </div>
+
+                <div>
+
+                    <input type="range" id="bottom-light-slider" class="slider-hori" min="-1000" max="1000" value="0">
+
+                </div>
+
+            </div>
+
+
+            <!-- Right sliders -->
+            <div class="slider-column">
+                <input type="range" id="right-light-slider" class="slider-vert-round" min="-1000" max="1000"
+                    orient="vertical" value="0">
+                <input type="range" id="right-chrom-slider" class="slider-vert-square" min="-1000" max="1000"
+                    orient="vertical" value="0">
+            </div>
+            <div class="padding-column">
+                <button onclick="completeAdjustment()">Safe Datapoints and<br>rerandomise Colors</button>
+                <!-- <button onclick="findAndUpdateNewColorsToMatch()">Test</button>
+                <button onclick="updateLabelColors()">Colors?</button> -->
+            </div>
+        </div>
+
     </div>
-    <div class="slider-container">
-        <label for="greenSlider">Green:</label>
-        <input type="range" id="greenSlider" min="0" max="255" value="0">
-    </div>
-    <div class="slider-container">
-        <label for="blueSlider">Blue:</label>
-        <input type="range" id="blueSlider" min="0" max="255" value="0">
-    </div>
+
 
     <script>
-        const rectangle = document.getElementById('rectangle');
-        const redSlider = document.getElementById('redSlider');
-        const greenSlider = document.getElementById('greenSlider');
-        const blueSlider = document.getElementById('blueSlider');
+        /* https://www.w3schools.com/howto/howto_js_copy_clipboard.asp */
+        const left_light_slider = document.getElementById('left-light-slider');
+        const left_chrom_slider = document.getElementById('left-chrom-slider');
+        const right_light_slider = document.getElementById('right-light-slider');
+        const right_chrom_slider = document.getElementById('right-chrom-slider');
+        const bottom_light_slider = document.getElementById('bottom-light-slider');
 
-        function updateColor() {
-            const red = redSlider.value;
-            const green = greenSlider.value;
-            const blue = blueSlider.value;
-            rectangle.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        var displaytext = '';
+        var copyabletext = '';
+
+        function gamma_compressor(x) {
+            return x >= 0.0031308 ? 1.055 * Math.pow(x, 1 / 2.4) - 0.055 : 12.92 * x
+        }
+        // function gamma_decompressor(x) {
+        //     return x >= 0.04045 ? Math.pow((x + 0.055) / (1 + 0.055), 2.4) : x / 12.92
+        // }
+
+        var left_l = 0.5;
+        var left_c = 0.1;
+        var left_h = 160;
+
+        var right_l = 0.5;
+        var right_c = 0.1;
+        var right_h = 0;
+
+        var temp_left_l = 0.5;
+        var temp_left_c = 0.1;
+
+        var temp_right_l = 0.5;
+        var temp_right_c = 0.1;
+
+        var bottom_l = 0.5;
+        var temp_bottom_l = 0.5;
+
+
+        function findHighestChromaForLH(l, h) {
+            let iter_c = 0;
+            let c_step = 1;
+            for (let i = 0; i < 20; i++) {
+                if (is_valid_srgb255(srgb255_from_ok_lch(l, iter_c + c_step, h))) {
+                    iter_c += c_step
+                }
+                c_step /= 2
+            }
+            return iter_c
         }
 
-        redSlider.addEventListener('input', updateColor);
-        greenSlider.addEventListener('input', updateColor);
-        blueSlider.addEventListener('input', updateColor);
 
-        // Initialize color
-        updateColor();
+        function findAndUpdateNewColorsToMatch() {
+            let new_hue_1 = 360 * Math.random();
+            let new_hue_2 = (new_hue_1 + 10 + 340 * Math.random()) % 360;
+
+            let new_light_base = 0.55 + 0.3 * Math.random();
+            let new_light_1 = new_light_base + -0.05 + 0.1 * Math.random();
+            let new_light_2 = new_light_base + -0.05 + 0.1 * Math.random();
+            let new_light_3 = new_light_base + -0.05 + 0.1 * Math.random();
+            let max_c_for_hue_1 = findHighestChromaForLH(new_light_1, new_hue_1);
+            let max_c_for_hue_2 = findHighestChromaForLH(new_light_2, new_hue_2);
+            let new_chroma_base = 0
+            if (max_c_for_hue_1 > max_c_for_hue_2) {
+                new_chroma_base = max_c_for_hue_2;
+            } else {
+                new_chroma_base = max_c_for_hue_1;
+            }
+            let new_chroma_1 = new_chroma_base * Math.sqrt(Math.random());
+            let new_chroma_2 = new_chroma_base * Math.sqrt(Math.random());
+
+
+            left_l = new_light_1;
+            left_c = new_chroma_1;
+            left_h = new_hue_1;
+            temp_left_l = new_light_1;
+            temp_left_c = new_chroma_1;
+
+            right_l = new_light_2;
+            right_c = new_chroma_2;
+            right_h = new_hue_2;
+            temp_right_l = new_light_2;
+            temp_right_c = new_chroma_2;
+
+            bottom_l = new_light_3;
+            temp_bottom_l = new_light_3;
+            updateLabelColors();
+            randomizeLabelPositions();
+            initialiseGutterColors();
+        }
+
+        // function testitest() {
+        //     console.log(findHighestChromaForLH(0.5, 4))
+        // }
+
+        function updateLeftGutterColors(hex_color) {
+            document.getElementById('left-light-slider').style.backgroundColor = hex_color;
+            document.getElementById('left-chrom-slider').style.backgroundColor = hex_color;
+        }
+        function updateRightGutterColors(hex_color) {
+            document.getElementById('right-light-slider').style.backgroundColor = hex_color;
+            document.getElementById('right-chrom-slider').style.backgroundColor = hex_color;
+        }
+        function updateBottomGutterColors(hex_color) {
+            document.getElementById('bottom-light-slider').style.backgroundColor = hex_color;
+        }
+
+
+        function initialiseGutterColors() {
+            updateLeftGutterColors(hex_from_rgb(srgb255_from_ok_lch(left_l, left_c, left_h)));
+            updateRightGutterColors(hex_from_rgb(srgb255_from_ok_lch(right_l, right_c, right_h)));
+            updateBottomGutterColors(hex_from_rgb(srgb255_from_ok_lch(bottom_l, 0, 0)));
+        }
+
+        function randomCenterer() {  // So stuff is more in the middle than with pure random
+            return 0.5 * (Math.tan(1.57 * (Math.random() - 0.5)) + 1)
+        }
+
+        function randomizeLabelPositions() {
+            document.getElementById('box-1').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-2').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-3').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-4').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-5').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-6').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-7').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-8').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-9').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-10').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-11').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+            document.getElementById('box-12').style.left = Math.round(54 + randomCenterer() * 300).toString() + "px";
+        }
+
+
+
+        function updateLeftLabelColors() {
+            let left_color = hex_from_rgb(srgb255_from_ok_lch(temp_left_l, temp_left_c, left_h))
+
+            document.getElementById('box-1').style.color = left_color;
+            document.getElementById('box-1').style.border = "2px solid " + left_color;
+            document.getElementById('box-4').style.color = left_color;
+            document.getElementById('box-4').style.border = "2px solid " + left_color;
+            document.getElementById('box-7').style.color = left_color;
+            document.getElementById('box-7').style.border = "2px solid " + left_color;
+            document.getElementById('box-10').style.color = left_color;
+            document.getElementById('box-10').style.border = "2px solid " + left_color;
+        }
+
+        function updateRightLabelColors() {
+            let right_color = hex_from_rgb(srgb255_from_ok_lch(temp_right_l, temp_right_c, right_h))
+
+            document.getElementById('box-2').style.color = right_color;
+            document.getElementById('box-2').style.border = "2px solid " + right_color;
+            document.getElementById('box-5').style.color = right_color;
+            document.getElementById('box-5').style.border = "2px solid " + right_color;
+            document.getElementById('box-8').style.color = right_color;
+            document.getElementById('box-8').style.border = "2px solid " + right_color;
+            document.getElementById('box-11').style.color = right_color;
+            document.getElementById('box-11').style.border = "2px solid " + right_color;
+        }
+
+        function updateBottomLabelColors() {
+            let bottom_color = hex_from_rgb(srgb255_from_ok_lch(temp_bottom_l, 0, 0))
+
+            document.getElementById('box-3').style.color = bottom_color;
+            document.getElementById('box-3').style.border = "2px solid " + bottom_color;
+            document.getElementById('box-6').style.color = bottom_color;
+            document.getElementById('box-6').style.border = "2px solid " + bottom_color;
+            document.getElementById('box-9').style.color = bottom_color;
+            document.getElementById('box-9').style.border = "2px solid " + bottom_color;
+            document.getElementById('box-12').style.color = bottom_color;
+            document.getElementById('box-12').style.border = "2px solid " + bottom_color;
+        }
+
+        function updateLabelColors() {
+            updateLeftLabelColors();
+            updateRightLabelColors();
+            updateBottomLabelColors();
+        }
+
+        function srgb255_from_ok_lch(light, chrom, hue) {
+            let a = chrom * Math.cos(hue * 0.017453292519943295);
+            let b = chrom * Math.sin(hue * 0.017453292519943295);
+            let ln = light + 0.3963377774 * a + 0.2158037573 * b;
+            let me = light - 0.1055613458 * a - 0.0638541728 * b;
+            let sh = light - 0.0894841775 * a - 1.291485548 * b;
+            let l = ln * ln * ln;
+            let m = me * me * me;
+            let s = sh * sh * sh;
+            let lr = 4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
+            let lg = - 1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
+            let lb = - 0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s;
+            let red = 255 * gamma_compressor(lr);
+            let green = 255 * gamma_compressor(lg);
+            let blue = 255 * gamma_compressor(lb);
+            return [
+                red,
+                green,
+                blue
+            ];
+        }
+        function is_valid_srgb255(rgb) {
+            if (rgb[0] < -0.0 || rgb[0] > 255.0)
+                return false;
+            else if (rgb[1] < -0.0 || rgb[1] > 255.0)
+                return false;
+            else if (rgb[2] < -0.0 || rgb[2] > 255.0)
+                return false;
+            else
+                return true;
+        }
+        function componentToHex(c) { // https://stackoverflow.com/a/5624139
+            var hex = c.toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+        function hex_from_rgb(rgb) {
+            return "#" + componentToHex(Math.round(rgb[0])) + componentToHex(Math.round(rgb[1])) + componentToHex(Math.round(rgb[2]));
+        }
+
+
+        left_light_slider.addEventListener(
+            'input',
+            () => {
+                let provisional_l = left_l + 0.0001 * left_light_slider.value
+                let provisional_srgb255 = srgb255_from_ok_lch(provisional_l, left_c, left_h)
+                // console.log(provisional_l, provisional_srgb255, is_valid_srgb255(provisional_srgb255))
+                if (is_valid_srgb255(provisional_srgb255)) {
+                    temp_left_l = provisional_l
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
+                    document.getElementById('left-light-slider').style.setProperty('--SliderColor', `#646464`)
+                    updateLeftGutterColors(hex_from_rgb(provisional_srgb255));
+                } else {
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_left_l, left_c, left_h));
+                    document.getElementById('left-light-slider').style.setProperty('--SliderColor', `#000000`)
+                    updateLeftGutterColors(hex_from_rgb(srgb255_from_ok_lch(temp_left_l, left_c, left_h)));
+                }
+                updateLeftLabelColors();
+            }
+        );
+        left_light_slider.addEventListener('change', () => {
+            left_l = temp_left_l;
+            left_light_slider.value = 0;
+            document.getElementById('left-light-slider').style.setProperty('--SliderColor', `#646464`)
+        });
+
+        left_chrom_slider.addEventListener(
+            'input',
+            () => {
+                let provisional_c = left_c + 0.0001 * left_chrom_slider.value
+                let provisional_srgb255 = srgb255_from_ok_lch(left_l, provisional_c, left_h)
+                if (is_valid_srgb255(provisional_srgb255)) {
+                    temp_left_c = provisional_c
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
+                    document.getElementById('left-chrom-slider').style.setProperty('--SliderColor', `#646464`)
+                    updateLeftGutterColors(hex_from_rgb(provisional_srgb255));
+                } else {
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_left_l, left_c, left_h));
+                    document.getElementById('left-chrom-slider').style.setProperty('--SliderColor', `#000000`)
+                    updateLeftGutterColors(hex_from_rgb(srgb255_from_ok_lch(left_l, temp_left_c, left_h)));
+                }
+                updateLeftLabelColors();
+            }
+        );
+        left_chrom_slider.addEventListener('change', () => {
+            left_c = temp_left_c;
+            left_chrom_slider.value = 0;
+            document.getElementById('left-chrom-slider').style.setProperty('--SliderColor', `#646464`)
+        });
+
+        right_light_slider.addEventListener(
+            'input',
+            () => {
+                let provisional_l = right_l + 0.0001 * right_light_slider.value
+                let provisional_srgb255 = srgb255_from_ok_lch(provisional_l, right_c, right_h)
+                // console.log(provisional_l, provisional_srgb255, is_valid_srgb255(provisional_srgb255))
+                if (is_valid_srgb255(provisional_srgb255)) {
+                    temp_right_l = provisional_l
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
+                    document.getElementById('right-light-slider').style.setProperty('--SliderColor', `#646464`)
+                    updateRightGutterColors(hex_from_rgb(provisional_srgb255));
+                } else {
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_right_l, right_c, right_h));
+                    document.getElementById('right-light-slider').style.setProperty('--SliderColor', `#000000`)
+                    updateRightGutterColors(hex_from_rgb(srgb255_from_ok_lch(temp_right_l, right_c, right_h)));
+                }
+                updateRightLabelColors();
+            }
+        );
+        right_light_slider.addEventListener('change', () => {
+            right_l = temp_right_l;
+            right_light_slider.value = 0;
+            document.getElementById('right-light-slider').style.setProperty('--SliderColor', `#646464`)
+        });
+
+        right_chrom_slider.addEventListener(
+            'input',
+            () => {
+                let provisional_c = right_c + 0.0001 * right_chrom_slider.value
+                let provisional_srgb255 = srgb255_from_ok_lch(right_l, provisional_c, right_h)
+                if (is_valid_srgb255(provisional_srgb255)) {
+                    temp_right_c = provisional_c
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
+                    document.getElementById('right-chrom-slider').style.setProperty('--SliderColor', `#646464`)
+                    updateRightGutterColors(hex_from_rgb(provisional_srgb255));
+                } else {
+                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_right_l, right_c, right_h));
+                    document.getElementById('right-chrom-slider').style.setProperty('--SliderColor', `#000000`)
+                    updateRightGutterColors(hex_from_rgb(srgb255_from_ok_lch(right_l, temp_right_c, right_h)));
+                }
+                updateRightLabelColors();
+            }
+        );
+        right_chrom_slider.addEventListener('change', () => {
+            right_c = temp_right_c;
+            right_chrom_slider.value = 0;
+            document.getElementById('right-chrom-slider').style.setProperty('--SliderColor', `#646464`)
+        });
+
+        bottom_light_slider.addEventListener(
+            'input',
+            () => {
+                let provisional_l = bottom_l + 0.0001 * bottom_light_slider.value
+                let provisional_srgb255 = srgb255_from_ok_lch(provisional_l, 0, 0)
+                if (is_valid_srgb255(provisional_srgb255)) {
+                    temp_bottom_l = provisional_l
+                    document.getElementById('bottom-light-slider').style.setProperty('--SliderColor', `#646464`)
+                    updateBottomGutterColors(hex_from_rgb(provisional_srgb255));
+                } else {
+                    fallback_color = hex_from_rgb(srgb255_from_ok_lch(temp_bottom_l, 0, 0));
+                    document.getElementById('bottom-light-slider').style.setProperty('--SliderColor', `#000000`)
+                    updateBottomGutterColors(fallback_color);
+                }
+                updateBottomLabelColors();
+            }
+        );
+        bottom_light_slider.addEventListener('change', () => {
+            bottom_l = temp_bottom_l;
+            bottom_light_slider.value = 0;
+            document.getElementById('bottom-light-slider').style.setProperty('--SliderColor', `#646464`)
+        });
+
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(copyabletext);
+            alert('Thanks for vanquishing Chaos from the Realms of Color!\n\n'+
+                  'Results should be copied to your clipboard, if you\'d send\n'+
+                  'them to Toartmock+ColorDataCollection@gmail.com\n'+
+                  'that would be wonderful!\n\n' + copyabletext);
+        }
+
+        function addText() {
+            let c_1 = hex_from_rgb(srgb255_from_ok_lch(left_l, left_c, left_h)).slice(1);
+            let c_2 = hex_from_rgb(srgb255_from_ok_lch(right_l, right_c, right_h)).slice(1);
+            let c_3 = hex_from_rgb(srgb255_from_ok_lch(bottom_l, 0, 0)).slice(1);
+
+            displaytext += c_1 + ' ' + c_2 + ' ' + c_3 + '<br>';
+            copyabletext += c_1 + ' ' + c_2 + ' ' + c_3 + '\n';
+            document.getElementById('hexcodedisplay').innerHTML = displaytext;
+        }
+
+        function completeAdjustment() {
+            addText();
+            findAndUpdateNewColorsToMatch();
+        }
+
     </script>
 </body>
 </html>
