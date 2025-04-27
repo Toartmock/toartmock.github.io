@@ -543,11 +543,9 @@
                 // console.log(provisional_l, provisional_srgb255, is_valid_srgb255(provisional_srgb255))
                 if (is_valid_srgb255(provisional_srgb255)) {
                     temp_left_l = provisional_l
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
                     document.getElementById('left-light-slider').style.setProperty('--SliderColor', `#646464`)
                     updateLeftGutterColors(hex_from_rgb(provisional_srgb255));
                 } else {
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_left_l, left_c, left_h));
                     document.getElementById('left-light-slider').style.setProperty('--SliderColor', `#000000`)
                     updateLeftGutterColors(hex_from_rgb(srgb255_from_ok_lch(temp_left_l, left_c, left_h)));
                 }
@@ -567,11 +565,9 @@
                 let provisional_srgb255 = srgb255_from_ok_lch(left_l, provisional_c, left_h)
                 if (is_valid_srgb255(provisional_srgb255)) {
                     temp_left_c = provisional_c
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
                     document.getElementById('left-chrom-slider').style.setProperty('--SliderColor', `#646464`)
                     updateLeftGutterColors(hex_from_rgb(provisional_srgb255));
                 } else {
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_left_l, left_c, left_h));
                     document.getElementById('left-chrom-slider').style.setProperty('--SliderColor', `#000000`)
                     updateLeftGutterColors(hex_from_rgb(srgb255_from_ok_lch(left_l, temp_left_c, left_h)));
                 }
@@ -592,11 +588,9 @@
                 // console.log(provisional_l, provisional_srgb255, is_valid_srgb255(provisional_srgb255))
                 if (is_valid_srgb255(provisional_srgb255)) {
                     temp_right_l = provisional_l
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
                     document.getElementById('right-light-slider').style.setProperty('--SliderColor', `#646464`)
                     updateRightGutterColors(hex_from_rgb(provisional_srgb255));
                 } else {
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_right_l, right_c, right_h));
                     document.getElementById('right-light-slider').style.setProperty('--SliderColor', `#000000`)
                     updateRightGutterColors(hex_from_rgb(srgb255_from_ok_lch(temp_right_l, right_c, right_h)));
                 }
@@ -616,11 +610,9 @@
                 let provisional_srgb255 = srgb255_from_ok_lch(right_l, provisional_c, right_h)
                 if (is_valid_srgb255(provisional_srgb255)) {
                     temp_right_c = provisional_c
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(provisional_srgb255);
                     document.getElementById('right-chrom-slider').style.setProperty('--SliderColor', `#646464`)
                     updateRightGutterColors(hex_from_rgb(provisional_srgb255));
                 } else {
-                    document.getElementById('central-element').style.backgroundColor = hex_from_rgb(srgb255_from_ok_lch(temp_right_l, right_c, right_h));
                     document.getElementById('right-chrom-slider').style.setProperty('--SliderColor', `#000000`)
                     updateRightGutterColors(hex_from_rgb(srgb255_from_ok_lch(right_l, temp_right_c, right_h)));
                 }
